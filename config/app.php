@@ -148,7 +148,8 @@ return [
         Illuminate\View\ViewServiceProvider::class,
         Collective\Html\HtmlServiceProvider::class,
         Unisharp\Ckeditor\ServiceProvider::class,
-
+        //Clockwork\Support\Laravel\ClockworkServiceProvider::class,
+        
         /*
          * Package Service Providers...
          */

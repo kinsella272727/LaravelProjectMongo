@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Storage;
 use App\Post;
 use App\Tag;
 use App\Category;
+//use App\User;
 use DB;
 
 class PostsController extends Controller
@@ -22,10 +23,15 @@ class PostsController extends Controller
      */
     public function index()
     {
-        clock('Test Posts.');
+        //clock()->info("Post {$posts} has been displayed");
+        //clock(Post::first(), $posts);
         clock()->startEvent('get-all-posts', "Loading all posts from the database");
         $posts = Post::orderBy('title', 'desc')->get();
+        // clock($posts = Post::orderBy('title', 'desc')->get());
+        // clock('Test');
         clock()->endEvent('get-all-posts');
+
+
         return view('posts.index')->with('posts', $posts);
     }
 
@@ -95,6 +101,8 @@ class PostsController extends Controller
     public function show($id)
     {
         $post = Post::find($id);
+        //clock()->info("Post {$id} has been displayed");
+
         return view('posts.show')->with('post', $post);
     }
 

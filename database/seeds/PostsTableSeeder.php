@@ -11,6 +11,8 @@ class PostsTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(App\Post::class, 10)->create();
+        $userIds = App\User::select('_id')->get()->toArray();
+      //$catgIds = App\Category::select('_id')->get()->toArray();
+        factory(App\Post::class, 5)->create(['userId' => $userIds]);
     }
 }

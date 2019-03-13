@@ -24,8 +24,10 @@ class HomeController extends Controller
      */
     public function index()
     {
+        clock()->startEvent('get-users', "Loading all users from the database");
         $user_id = auth()->user()->id;
         $user = User::find($user_id);
         return view('home')->with('posts', $user->posts);
+        clock()->endEvent('get-users');
     }
 }

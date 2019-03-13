@@ -14,8 +14,10 @@ class AddUserIdToPosts extends Migration
      */
     public function up()
     {
-        Schema::table('posts', function($table){
-          $table->integer('user_id');
+        Schema::connection($this->connection)
+          ->table('posts', function(Blueprint $collection){
+          $collection->integer('user_id');
+          $collection->foreign('user_id')->references('id')->on('users');
         });
     }
 
@@ -26,8 +28,10 @@ class AddUserIdToPosts extends Migration
      */
     public function down()
     {
-      Schema::table('posts', function($table){
-        $table->dropColumn('user_id');
+      Schema::connection($this->connection)
+        ->table('posts', function(Blueprint $collection){
+          $collection->drop();
+
       });
     }
 }

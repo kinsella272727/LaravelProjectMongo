@@ -13,24 +13,40 @@ use Faker\Generator as Faker;
 |
 */
 
-$factory->define(App\Post::class, function (Faker $faker) {
+$factory->define(App\Post::class, function (
+  Faker $faker,
+  $userIds = array(),
+  // $catgIds = array()
+) {
+
+  // dd($userIds[0]["_id"]);
+
     return [
         'title' => $faker->sentence,
         'body' => $faker->text,
         'created_at' => now(),
         'updated_at' => now(),
-        'user_id' => function () {
+        'user_id' => function ($data) {
           //
-          // $user = App\User::where('id', '=', mt_rand(1, App\User::count()))->first();
+
           //
           // if ($user === null) {
           //   return 1;
           // }
 
             // $max = App\User::count();
-            $max = 1000;
+            $max = sizeof($data['userId']) - 1;
 
-            return mt_rand(1, $max);
+
+            return $data['userId'][mt_rand(0, $max)]["_id"];
+        },
+        'category_id' => function () {
+          // $max = sizeof($data['catgId']);
+          //
+          // return $data['catgId'][mt_rand(0, $max)]["_id"];
+          $max = 1000;
+
+          return mt_rand(1, $max);
         },
         'cover_image' => 'noimage.jpg',
     ];

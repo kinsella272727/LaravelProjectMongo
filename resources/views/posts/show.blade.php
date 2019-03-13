@@ -8,10 +8,10 @@
   <div>
     {{$post->body}}
   </div>
-  <p>Category: {{ $post->category->name}}</p>
+  {{-- <p>Category: {{ $post->category->name}}</p> --}}
   <hr>
-  <small>Written on {{$post->created_at}} by {{$post->user->name}}</small>
-  <hr>
+  {{-- <small>Written on {{$post->created_at}} by {{$post->user->name}}</small> --}}
+  </hr>
   @if(!Auth::guest())
 
     <div class="row">

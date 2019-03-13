@@ -14,9 +14,10 @@ class AddCategoryIdToPostsTable extends Migration
      */
     public function up()
     {
-        Schema::table('posts', function (Blueprint $table) {
-            $table->integer('category_id');
-
+        Schema::connection($this->connection)
+        ->table('posts', function (Blueprint $collection) {
+            $collection->integer('category_id');
+            $collection->foreign('category_id')->references('id')->on('categories');
         });
     }
 
