@@ -16,7 +16,7 @@ use Faker\Generator as Faker;
 $factory->define(App\Post::class, function (
   Faker $faker,
   $userIds = array(),
-  // $catgIds = array()
+  $catgIds = array()
 ) {
 
   // dd($userIds[0]["_id"]);
@@ -40,13 +40,13 @@ $factory->define(App\Post::class, function (
 
             return $data['userId'][mt_rand(0, $max)]["_id"];
         },
-        'category_id' => function () {
-          // $max = sizeof($data['catgId']);
-          //
-          // return $data['catgId'][mt_rand(0, $max)]["_id"];
-          $max = 1000;
+        'category_id' => function ($data) {
+          $max = sizeof($data['catgId']) - 1;
 
-          return mt_rand(1, $max);
+          return $data['catgId'][mt_rand(0, $max)]["_id"];
+          // $max = 1000;
+          //
+          // return mt_rand(1, $max);
         },
         'cover_image' => 'noimage.jpg',
     ];
